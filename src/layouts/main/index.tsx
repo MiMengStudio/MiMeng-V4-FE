@@ -1,3 +1,4 @@
+import { useClipboard } from '@/hooks/useClipboard';
 import { usePlatform } from '@/hooks/usePlatform';
 
 interface MainLayoutProps {
@@ -5,6 +6,7 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const clipboardManager = useClipboard();
   return (
     <div className="main">
       <header>
@@ -25,6 +27,15 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       </nav>
       platformInfo: <pre>{JSON.stringify(usePlatform(), null, 2)}</pre>
       UA: {typeof window !== 'undefined' ? window.navigator.userAgent : 'N/A'}
+      <button onClick={() => clipboardManager.copyToClipboard('Hello MiMeng!')}>
+        Copy to Clipboard
+      </button>
+      <button onClick={() => clipboardManager.readClipboardText()}>Read from Clipboard</button>
+      <div className="clipboard-status">
+        Copied Text: {clipboardManager.copiedText || 'None'}
+        <br />
+        Read Text: {clipboardManager.readText || 'None'}
+      </div>
       <main>{children}</main>
       <footer>
         <p>© 2025 MiMeng</p>
