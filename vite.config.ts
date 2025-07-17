@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import { resolve } from 'path';
 
 const host = process.env.TAURI_DEV_HOST;
 const port = parseInt(process.env.TAURI_DEV_PORT || '1420', 10);
@@ -10,6 +11,11 @@ const proxyUrl = process.env.VITE_PROXY_URL || 'http://localhost:3000';
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
   plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
+  },
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
