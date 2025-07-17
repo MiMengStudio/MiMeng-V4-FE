@@ -1,8 +1,11 @@
+import { usePlatform } from '@/hooks/usePlatform';
+
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const { platform } = usePlatform();
   return (
     <div className="main">
       <header>
@@ -21,6 +24,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </li>
         </ul>
       </nav>
+      platform: {platform}
       <main>{children}</main>
       <footer>
         <p>© 2025 MiMeng</p>
