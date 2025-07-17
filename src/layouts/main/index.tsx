@@ -5,7 +5,6 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const { platform } = usePlatform();
   return (
     <div className="main">
       <header>
@@ -24,7 +23,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </li>
         </ul>
       </nav>
-      platform: {platform}
+      platformInfo: <pre>{JSON.stringify(usePlatform(), null, 2)}</pre>
+      UA: {typeof window !== 'undefined' ? window.navigator.userAgent : 'N/A'}
       <main>{children}</main>
       <footer>
         <p>© 2025 MiMeng</p>
