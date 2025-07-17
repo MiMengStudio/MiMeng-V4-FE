@@ -12,13 +12,16 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@fluentui/react-components": "^9.66.8",
     "@tailwindcss/vite": "^4.1.11",
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-opener": "^2",
+    "mdui": "^2.1.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.7.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
