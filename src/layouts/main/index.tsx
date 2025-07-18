@@ -1,5 +1,6 @@
 import { useClipboard } from '@/hooks/useClipboard';
 import { usePlatform } from '@/hooks/usePlatform';
+import { useSystemTheme } from '@/hooks/useSystemTheme';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -7,6 +8,7 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const clipboardManager = useClipboard();
+  const SystemTheme = useSystemTheme();
   return (
     <div className="main">
       <header>
@@ -35,6 +37,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         Copied Text: {clipboardManager.copiedText || 'None'}
         <br />
         Read Text: {clipboardManager.readText || 'None'}
+      </div>
+      <div>
+        <h2>System Theme: {SystemTheme}</h2>
       </div>
       <main>{children}</main>
       <footer>
