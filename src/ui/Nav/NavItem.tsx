@@ -345,25 +345,20 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
         relative w-full flex items-center p-2 text-left overflow-hidden
         transition-colors duration-150 ease-in-out
         justify-start
-        hover:bg-gray-100 dark:hover:bg-gray-800
-        active:bg-gray-200 dark:active:bg-gray-700
+        focus:outline-none
         ${
-          activeColorDelay
-            ? 'bg-gray-200 dark:bg-gray-800 text-[#108A3D] dark:text-[#108A3D]'
-            : 'text-gray-700 dark:text-gray-300'
+          isActive
+            ? 'bg-[var(--fluent-color-neutral-background1-selected)] text-[var(--fluent-color-brand-foreground1)] hover:bg-[var(--fluent-color-neutral-background1-hover)] active:bg-[var(--fluent-color-neutral-background1-pressed)]'
+            : 'text-[var(--fluent-color-neutral-foreground1)] hover:bg-[var(--fluent-color-neutral-background1-hover)] active:bg-[var(--fluent-color-neutral-background1-pressed)]'
         }
       `}
-      style={{
-        color: activeColorDelay ? '#108A3D' : undefined,
-      }}
       title={item.label}
       disabled={isSwitching}
     >
       {/* 左侧指示条 - 使用Motion动画 */}
       {shouldShowIndicator && (
         <motion.div
-          className="absolute left-0 w-1 rounded-full"
-          style={{ backgroundColor: '#108A3D' }}
+          className="absolute left-0 w-1 rounded-full bg-[var(--fluent-color-brand-background)]"
           initial={false}
           animate={controls}
         />

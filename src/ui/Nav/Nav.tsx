@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 import Icon from '@/ui/Icon';
 import NavItemComponent from './NavItem';
 import { NavProps, NavItem } from './nav.types';
+import { fluentBackgrounds } from '@/theme/fluent-classes';
 
 const Nav: React.FC<NavProps> = ({ items, className = '' }) => {
   const location = useLocation();
@@ -34,18 +35,18 @@ const Nav: React.FC<NavProps> = ({ items, className = '' }) => {
   return (
     <nav
       className={`
-        h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700
-        transition-all duration-200 ease-in-out
-        ${isCollapsed ? 'w-14' : 'w-64'}
+        h-full transition-all duration-200 ease-in-out
+        ${fluentBackgrounds.neutralBackground2}
+        ${isCollapsed ? 'w-14' : 'w-48'}
         ${className}
       `}
     >
       {/* Header */}
-      <div className="flex items-center p-4 border-b border-gray-200 dark:border-gray-700">
+      <div className="flex items-center px-4 py-2">
         <div className="w-6 h-5 flex items-center justify-center">
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors -m-2"
+            className="p-2 rounded-lg transition-colors -m-2 hover:bg-[var(--fluent-color-neutral-background1-hover)] focus:bg-[var(--fluent-color-neutral-background1-hover)] focus:outline-none active:bg-[var(--fluent-color-neutral-background1-pressed)]"
             aria-label={isCollapsed ? '展开导航' : '折叠导航'}
           >
             <Icon icon="solar:hamburger-menu-linear" className="w-6 h-5" />
@@ -65,6 +66,7 @@ const Nav: React.FC<NavProps> = ({ items, className = '' }) => {
             previousActiveId={previousActiveId}
             currentActiveId={currentActiveId}
             itemIndex={index}
+            currentActiveIndex={currentActiveIndex}
             previousActiveIndex={previousActiveIndex}
             items={items}
             isSwitching={isSwitching}

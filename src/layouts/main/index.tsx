@@ -16,7 +16,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const isDesktopClient = isDesktop && isClient;
 
   return (
-    <div className="main-layout flex flex-col h-screen">
+    <div className="main-layout flex flex-col h-screen bg-[var(--fluent-color-neutral-background2)]">
       {/* 桌面端 Header，仅桌面客户端显示，固定在最顶部 */}
       {isDesktopClient && <WindowsHeaderLayout />}
 
@@ -28,7 +28,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         </aside>
 
         {/* 右侧内容区 */}
-        <div className="flex flex-col flex-1 h-full">
+        <div className="flex flex-col flex-1 h-full rounded-tl-md border-1 border-[var(--fluent-color-neutral-stroke1)] overflow-hidden bg-[var(--fluent-color-neutral-background1)]">
           <main className="flex-1 p-6 overflow-auto">
             {/* 主内容区 */}
             <section>{children}</section>

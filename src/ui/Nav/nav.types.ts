@@ -13,6 +13,7 @@ export interface NavItemComponentProps {
   previousActiveId: string | null;
   currentActiveId: string | null;
   itemIndex: number;
+  currentActiveIndex: number | null;
   previousActiveIndex: number | null;
   items: NavItem[];
 }

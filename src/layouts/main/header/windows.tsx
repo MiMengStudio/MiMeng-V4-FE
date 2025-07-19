@@ -76,35 +76,43 @@ const WindowsHeaderLayout: React.FC = () => {
 
   return (
     <div
-      className="flex items-start justify-between h-12 pl-4 bg-gradient-to-r from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 border-b border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100 select-none shadow-sm"
+      className="flex items-start justify-between h-12 pl-4 bg-[var(--fluent-color-neutral-background2)] text-[var(--fluent-color-neutral-foreground1)] select-none"
       style={dragStyle}
     >
       {/* 应用标题 */}
-      <span className="text-base font-semibold tracking-wide flex items-center gap-2 self-center">
-        <Icon component={Logo} size={18} className="text-blue-500" />
+      <span className="text-base font-semibold tracking-wide flex items-center gap-2 self-center text-[var(--fluent-color-neutral-foreground1)]">
+        <Icon component={Logo} size={18} className="text-[var(--fluent-color-brand-foreground1)]" />
         迷梦
       </span>
 
       {/* 窗口控制按钮 */}
       <div className="flex">
         <button
-          className="w-12 h-8 flex items-center justify-center transition hover:bg-gray-200 active:bg-gray-300"
+          className="w-12 h-8 flex items-center justify-center transition-colors hover:bg-[var(--fluent-color-neutral-background1-hover)] active:bg-[var(--fluent-color-neutral-background1-pressed)]"
           style={noDragStyle}
           title="刷新网页"
           onClick={handleRefresh}
         >
-          <Icon icon="solar:refresh-linear" size={18} className="text-gray-500" />
+          <Icon
+            icon="solar:refresh-linear"
+            size={18}
+            className="text-[var(--fluent-color-neutral-foreground2)]"
+          />
         </button>
         <button
-          className="w-12 h-8 flex items-center justify-center transition hover:bg-gray-200 active:bg-gray-300"
+          className="w-12 h-8 flex items-center justify-center transition-colors hover:bg-[var(--fluent-color-neutral-background1-hover)] active:bg-[var(--fluent-color-neutral-background1-pressed)]"
           style={noDragStyle}
           title="最小化"
           onClick={handleMinimize}
         >
-          <Icon icon="fluent:subtract-24-regular" size={18} className="text-gray-500" />
+          <Icon
+            icon="fluent:subtract-24-regular"
+            size={18}
+            className="text-[var(--fluent-color-neutral-foreground2)]"
+          />
         </button>
         <button
-          className="w-12 h-8 flex items-center justify-center transition hover:bg-gray-200 active:bg-gray-300"
+          className="w-12 h-8 flex items-center justify-center transition-colors hover:bg-[var(--fluent-color-neutral-background1-hover)] active:bg-[var(--fluent-color-neutral-background1-pressed)]"
           style={noDragStyle}
           title={isMaximized ? '恢复窗口' : '最大化'}
           onClick={handleMaximize}
@@ -112,11 +120,11 @@ const WindowsHeaderLayout: React.FC = () => {
           <Icon
             icon={isMaximized ? 'solar:minimize-linear' : 'solar:maximize-linear'}
             size={18}
-            className="text-gray-500"
+            className="text-[var(--fluent-color-neutral-foreground2)]"
           />
         </button>
         <button
-          className="w-12 h-8 flex items-center justify-center transition hover:bg-red-500 hover:text-white active:bg-red-600 group"
+          className="w-12 h-8 flex items-center justify-center transition-colors hover:bg-[var(--fluent-color-palette-red-background3)] active:bg-[var(--fluent-color-palette-red-foreground1)] group"
           style={noDragStyle}
           title="关闭"
           onClick={handleClose}
@@ -124,7 +132,7 @@ const WindowsHeaderLayout: React.FC = () => {
           <Icon
             icon="fluent:dismiss-24-regular"
             size={18}
-            className="text-gray-500 group-hover:text-gray-100"
+            className="text-[var(--fluent-color-neutral-foreground2)] group-hover:text-white group-active:text-white"
           />
         </button>
       </div>
