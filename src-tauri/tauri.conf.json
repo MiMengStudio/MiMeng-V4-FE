@@ -15,7 +15,8 @@
         "title": "迷梦",
         "width": 960,
         "height": 540,
-        "userAgent": "MiMeng"
+        "userAgent": "MiMeng",
+        "decorations": false
       }
     ],
     "security": {

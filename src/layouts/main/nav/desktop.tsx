@@ -8,10 +8,12 @@ import {
 } from '@fluentui/react-components';
 import { useLocation, useNavigate } from 'react-router';
 import { useState } from 'react';
+import Icon from '@/ui/Icon';
 
 const navMap: Record<string, string> = {
   '/home': '1',
   '/about': '2',
+  '/test': '3',
 };
 
 const NavDesktopLayout = () => {
@@ -41,11 +43,26 @@ const NavDesktopLayout = () => {
         </Tooltip>
       </NavDrawerHeader>
       <NavDrawerBody>
-        <NavItem value="1" onClick={() => handleNavItemClick('/home')}>
+        <NavItem
+          value="1"
+          icon={<Icon icon="solar:home-bold-duotone" />}
+          onClick={() => handleNavItemClick('/home')}
+        >
           Home
         </NavItem>
-        <NavItem value="2" onClick={() => handleNavItemClick('/about')}>
+        <NavItem
+          value="2"
+          icon={<Icon icon="solar:info-square-bold-duotone" />}
+          onClick={() => handleNavItemClick('/about')}
+        >
           About
+        </NavItem>
+        <NavItem
+          value="3"
+          icon={<Icon icon="solar:command-line-duotone" />}
+          onClick={() => handleNavItemClick('/test')}
+        >
+          Test
         </NavItem>
       </NavDrawerBody>
     </NavDrawer>

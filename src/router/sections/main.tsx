@@ -7,6 +7,7 @@ import Page500 from '@/pages/common/Page500';
 
 const HomePage = lazy(() => import('@/pages/home'));
 const AboutPage = lazy(() => import('@/pages/about'));
+const TestPage = lazy(() => import('@/pages/test'));
 
 export const mainRoutes: RouteObject[] = [
   {
@@ -22,10 +23,10 @@ export const mainRoutes: RouteObject[] = [
       { path: '', element: <HomePage /> },
       { path: 'home', element: <HomePage /> },
       { path: 'about', element: <AboutPage /> },
+      { path: 'test', element: <TestPage /> },
       { path: '403', element: <Page403 /> },
       { path: '404', element: <Page404 /> },
       { path: '500', element: <Page500 /> },
-      { path: 'test', element: <div>Test Page</div> }, // Example route
     ],
   },
 ];

@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
+import Icons from 'unplugin-icons/vite';
 
 const host = process.env.TAURI_DEV_HOST;
 const port = parseInt(process.env.TAURI_DEV_PORT || '1420', 10);
@@ -14,6 +15,21 @@ export default defineConfig(async () => ({
   plugins: [
     react(),
     tailwindcss(),
+    Icons({
+      compiler: 'jsx',
+      jsx: 'react',
+      autoInstall: true,
+      defaultStyle: '',
+      defaultClass: '',
+      scale: 1,
+      iconCustomizer: (collection, icon, props) => {
+        // 自定义图标属性
+        if (collection === 'custom') {
+          props.width = props.width || '1em';
+          props.height = props.height || '1em';
+        }
+      },
+    }),
     AutoImport({
       imports: [
         'react',
