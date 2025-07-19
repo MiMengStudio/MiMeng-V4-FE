@@ -1,5 +1,6 @@
 import { platform, type } from '@tauri-apps/plugin-os';
 import { getVersion } from '@tauri-apps/api/app';
+import { cache } from 'react';
 
 // 缓存平台信息，确保只获取一次
 let cachedPlatform: string = 'web';
@@ -24,20 +25,20 @@ try {
   if (typeof window !== 'undefined' && window.navigator) {
     const userAgent = window.navigator.userAgent;
     if (/Windows/i.test(userAgent)) {
-      cachedOsType = 'Windows';
+      cachedOsType = 'windows';
     } else if (/Macintosh|Mac OS X/i.test(userAgent)) {
-      cachedOsType = 'Mac';
+      cachedOsType = 'mac';
     } else if (/Linux/i.test(userAgent)) {
       // 检查是否为 Android 或 HarmonyOS
       if (/Android/i.test(userAgent)) {
-        cachedOsType = 'Android';
+        cachedOsType = 'android';
       } else if (/HarmonyOS/i.test(userAgent)) {
-        cachedOsType = 'HarmonyOS';
+        cachedOsType = 'harmonyos';
       } else {
-        cachedOsType = 'Linux';
+        cachedOsType = 'linux';
       }
     } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-      cachedOsType = 'iOS';
+      cachedOsType = 'ios';
     } else {
       cachedOsType = 'unknown';
     }
@@ -46,6 +47,8 @@ try {
   }
 }
 
+const isDesktop = cachedOsType === 'windows' || cachedOsType === 'mac' || cachedOsType === 'linux';
+
 export const usePlatform = () => {
   return {
     platform: cachedPlatform,
@@ -53,6 +56,7 @@ export const usePlatform = () => {
     isClient,
     isWeb,
     isWebview,
+    isDesktop,
     version: cachedVersion,
   };
 };
