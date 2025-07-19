@@ -49,6 +49,9 @@ try {
 
 const isDesktop = cachedOsType === 'windows' || cachedOsType === 'mac' || cachedOsType === 'linux';
 
+const isMobile =
+  cachedOsType === 'android' || cachedOsType === 'ios' || cachedOsType === 'harmonyos';
+
 export const usePlatform = () => {
   return {
     platform: cachedPlatform,
@@ -57,6 +60,7 @@ export const usePlatform = () => {
     isWeb,
     isWebview,
     isDesktop,
+    isMobile,
     version: cachedVersion,
   };
 };

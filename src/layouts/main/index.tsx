@@ -1,21 +1,24 @@
 import React, { lazy } from 'react';
-import WindowsHeaderLayout from './header/windows';
 import { usePlatform } from '@/hooks/usePlatform';
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
+const WindowsHeaderLayout = lazy(() => import('./header/windows'));
 const NavDesktopLayout = lazy(() => import('./nav/desktop'));
 const NavMobileLayout = lazy(() => import('./nav/mobile'));
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const { isDesktop } = usePlatform();
+  const { isDesktop, isClient } = usePlatform();
+
+  // 判断是否为桌面客户端（非网页版）
+  const isDesktopClient = isDesktop && isClient;
 
   return (
     <div className="main-layout flex flex-col h-screen">
-      {/* 桌面端 Header，仅桌面显示，固定在最顶部 */}
-      {isDesktop && <WindowsHeaderLayout />}
+      {/* 桌面端 Header，仅桌面客户端显示，固定在最顶部 */}
+      {isDesktopClient && <WindowsHeaderLayout />}
 
       {/* 主体内容区域 */}
       <div className="flex flex-1 h-full overflow-hidden">

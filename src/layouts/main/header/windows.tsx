@@ -76,7 +76,7 @@ const WindowsHeaderLayout: React.FC = () => {
 
   return (
     <div
-      className="flex items-start justify-between h-12 pl-4 bg-gradient-to-r from-white via-gray-50 to-gray-100 border-b border-gray-200 text-gray-800 select-none shadow-sm"
+      className="flex items-start justify-between h-12 pl-4 bg-gradient-to-r from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 border-b border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100 select-none shadow-sm"
       style={dragStyle}
     >
       {/* 应用标题 */}
@@ -86,7 +86,7 @@ const WindowsHeaderLayout: React.FC = () => {
       </span>
 
       {/* 窗口控制按钮 */}
-      <div className="flex gap-1">
+      <div className="flex">
         <button
           className="w-12 h-8 flex items-center justify-center transition hover:bg-gray-200 active:bg-gray-300"
           style={noDragStyle}

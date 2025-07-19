@@ -1,5 +1,6 @@
+import { HtmlDataAttribute } from './src/types/enum';
+
 export default {
-  darkMode: ['selector', "[${HtmlDataAttribute.ThemeMode}='dark']"],
   theme: {
     extend: {
       colors: {

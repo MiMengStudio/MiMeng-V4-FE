@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { UILibraryAdapter } from './types';
 import ThemeContext from './ThemeContext';
 import { useSystemTheme } from '@/hooks/useSystemTheme';
+import { usePlatform } from '@/hooks/usePlatform';
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ const ThemeProvider = ({ children, adapters = [] }: ThemeProviderProps) => {
   const { themeMode, resolvedThemeMode, themeColorPalette } = useSettings();
   const { setSettings } = useSettingActions();
   const systemThemeMode = useSystemTheme();
+  const { isMobile } = usePlatform();
 
   const root = document.documentElement;
 
@@ -36,6 +38,17 @@ const ThemeProvider = ({ children, adapters = [] }: ThemeProviderProps) => {
   useEffect(() => {
     root.setAttribute(HtmlDataAttribute.ThemeColorPalette, themeColorPalette);
   }, [themeColorPalette]);
+
+  // 设置平台相关的样式类
+  useEffect(() => {
+    if (isMobile) {
+      root.classList.add('mobile-platform');
+      root.classList.remove('desktop-platform');
+    } else {
+      root.classList.add('desktop-platform');
+      root.classList.remove('mobile-platform');
+    }
+  }, [isMobile]);
 
   const wrappedWithAdapters = adapters.reduce(
     (children, Adapter) => (
