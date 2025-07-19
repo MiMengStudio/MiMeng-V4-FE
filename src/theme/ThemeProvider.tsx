@@ -1,0 +1,60 @@
+import { useSettingActions, useSettings } from '@/store/settingStore';
+import { HtmlDataAttribute, ResovledThemeMode, ThemeMode, UIAdapter } from '@/types/enum';
+import { useEffect } from 'react';
+import { UILibraryAdapter } from './types';
+import ThemeContext from './ThemeContext';
+import { useSystemTheme } from '@/hooks/useSystemTheme';
+
+interface ThemeProviderProps {
+  children: React.ReactNode;
+  adapters?: UILibraryAdapter[];
+}
+
+const ThemeProvider = ({ children, adapters = [] }: ThemeProviderProps) => {
+  const { themeMode, resolvedThemeMode, themeColorPalette } = useSettings();
+  const { setSettings } = useSettingActions();
+  const systemThemeMode = useSystemTheme();
+
+  const root = document.documentElement;
+
+  useEffect(() => {
+    console.log('ThemeProvider: themeMode changed', themeMode, resolvedThemeMode, systemThemeMode);
+    switch (themeMode) {
+      case ThemeMode.Light:
+        root.setAttribute(HtmlDataAttribute.ThemeMode, ThemeMode.Light);
+        break;
+      case ThemeMode.Dark:
+        root.setAttribute(HtmlDataAttribute.ThemeMode, ThemeMode.Dark);
+        break;
+      case ThemeMode.System:
+        setSettings({ resolvedThemeMode: systemThemeMode as ResovledThemeMode });
+        root.setAttribute(HtmlDataAttribute.ThemeMode, systemThemeMode);
+        break;
+    }
+  }, [themeMode, resolvedThemeMode, systemThemeMode]);
+
+  useEffect(() => {
+    root.setAttribute(HtmlDataAttribute.ThemeColorPalette, themeColorPalette);
+  }, [themeColorPalette]);
+
+  const wrappedWithAdapters = adapters.reduce(
+    (children, Adapter) => (
+      <Adapter key={Adapter.name} mode={resolvedThemeMode as unknown as ThemeMode}>
+        <ThemeContext.Provider
+          value={{
+            themeMode: resolvedThemeMode as unknown as ThemeMode,
+            themeColorPalette,
+            UIAdapter: UIAdapter.Fluent,
+          }}
+        >
+          {children}
+        </ThemeContext.Provider>
+      </Adapter>
+    ),
+    children,
+  );
+
+  return wrappedWithAdapters;
+};
+
+export default ThemeProvider;

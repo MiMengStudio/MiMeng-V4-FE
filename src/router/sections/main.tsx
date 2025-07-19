@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import Page403 from '@/pages/common/Page403';
 import Page404 from '@/pages/common/Page404';
 import Page500 from '@/pages/common/Page500';
+import HomePage from '@/pages/home';
 
 export const mainRoutes: RouteObject[] = [
   {
@@ -16,9 +17,11 @@ export const mainRoutes: RouteObject[] = [
       </MainLayout>
     ),
     children: [
+      { path: '', element: <HomePage /> },
       { path: '403', element: <Page403 /> },
       { path: '404', element: <Page404 /> },
       { path: '500', element: <Page500 /> },
+      { path: 'test', element: <div>Test Page</div> }, // Example route
     ],
   },
 ];
