@@ -4,7 +4,9 @@ import { Suspense } from 'react';
 import Page403 from '@/pages/common/Page403';
 import Page404 from '@/pages/common/Page404';
 import Page500 from '@/pages/common/Page500';
-import HomePage from '@/pages/home';
+
+const HomePage = lazy(() => import('@/pages/home'));
+const AboutPage = lazy(() => import('@/pages/about'));
 
 export const mainRoutes: RouteObject[] = [
   {
@@ -18,6 +20,8 @@ export const mainRoutes: RouteObject[] = [
     ),
     children: [
       { path: '', element: <HomePage /> },
+      { path: 'home', element: <HomePage /> },
+      { path: 'about', element: <AboutPage /> },
       { path: '403', element: <Page403 /> },
       { path: '404', element: <Page404 /> },
       { path: '500', element: <Page500 /> },
