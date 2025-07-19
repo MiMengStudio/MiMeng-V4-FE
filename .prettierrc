@@ -5,7 +5,7 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "arrowParens": "always",
-  "endOfLine": "auto",
+  "endOfLine": "lf",
   "bracketSpacing": true,
   "jsxSingleQuote": false,
   "proseWrap": "preserve"
