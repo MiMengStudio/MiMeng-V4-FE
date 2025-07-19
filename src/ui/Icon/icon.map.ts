@@ -25,6 +25,7 @@ import IconSolarMinimizeLinear from '~icons/solar/minimize-linear';
 import IconSolarMaximizeLinear from '~icons/solar/maximize-linear';
 import IconFluentDismiss24Regular from '~icons/fluent/dismiss-24-regular';
 import IconFluentSubtract24Regular from '~icons/fluent/subtract-24-regular';
+import IconHumberMenuLinear from '~icons/solar/hamburger-menu-linear';
 // 图标映射表 - 只有在这里定义的图标才会使用本地打包版本
 export const localIconMap: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   // Solar 图标集
@@ -52,6 +53,7 @@ export const localIconMap: Record<string, React.ComponentType<React.SVGProps<SVG
   'solar:maximize-linear': IconSolarMaximizeLinear,
   'fluent:dismiss-24-regular': IconFluentDismiss24Regular,
   'fluent:subtract-24-regular': IconFluentSubtract24Regular,
+  'solar:hamburger-menu-linear': IconHumberMenuLinear,
 };
 
 /**
