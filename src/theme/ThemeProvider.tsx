@@ -5,6 +5,8 @@ import { UILibraryAdapter } from './types';
 import ThemeContext from './ThemeContext';
 import { useSystemTheme } from '@/hooks/useSystemTheme';
 import { usePlatform } from '@/hooks/usePlatform';
+import { convertFluentThemeToCSS } from './fluent-to-tailwind';
+import { fluentLightTheme, fluentDarkTheme } from './fluent.color';
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -18,6 +20,23 @@ const ThemeProvider = ({ children, adapters = [] }: ThemeProviderProps) => {
   const { isMobile } = usePlatform();
 
   const root = document.documentElement;
+
+  // 注入 Fluent CSS 变量
+  useEffect(() => {
+    const lightVars = convertFluentThemeToCSS(fluentLightTheme);
+    const darkVars = convertFluentThemeToCSS(fluentDarkTheme);
+
+    // 移除现有的 Fluent CSS 变量
+    Object.keys(lightVars).forEach((key) => {
+      root.style.removeProperty(key);
+    });
+
+    // 根据当前主题模式注入相应的 CSS 变量
+    const currentTheme = resolvedThemeMode === ResovledThemeMode.Dark ? darkVars : lightVars;
+    Object.entries(currentTheme).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  }, [resolvedThemeMode]);
 
   useEffect(() => {
     console.log('ThemeProvider: themeMode changed', themeMode, resolvedThemeMode, systemThemeMode);

@@ -7,6 +7,7 @@ import { usePlatform } from '@/hooks/usePlatform';
 import { useSystemTheme } from '@/hooks/useSystemTheme';
 import IconExample from './components/IconExample';
 import DebugInfo from './components/DebugInfo';
+import FluentThemeExample from './components/FluentThemeExample';
 
 export const TestPage: React.FC = () => {
   const toggleTheme = useToggleThemeMode();
@@ -15,7 +16,7 @@ export const TestPage: React.FC = () => {
   const systemTheme = useSystemTheme();
   const platformInfo = usePlatform();
 
-  const [tab, setTab] = React.useState<'debug' | 'button' | 'icon'>('debug');
+  const [tab, setTab] = React.useState<'debug' | 'button' | 'icon' | 'fluent'>('debug');
 
   return (
     <div className="min-h-screen ">
@@ -33,6 +34,12 @@ export const TestPage: React.FC = () => {
           <Button onClick={() => setTab('icon')} variant={tab === 'icon' ? 'primary' : 'outline'}>
             Icon
           </Button>
+          <Button
+            onClick={() => setTab('fluent')}
+            variant={tab === 'fluent' ? 'primary' : 'outline'}
+          >
+            Fluent 主题
+          </Button>
         </div>
         {tab === 'debug' && (
           <>
@@ -48,6 +55,7 @@ export const TestPage: React.FC = () => {
         )}
         {tab === 'button' && <ButtonExample />}
         {tab === 'icon' && <IconExample />}
+        {tab === 'fluent' && <FluentThemeExample />}
       </div>
     </div>
   );

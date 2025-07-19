@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "prettier": "prettier --write src --ignore-unknown",
     "tauri": "tauri",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "generate:fluent-css": "tsx scripts/generate-fluent-css.ts"
   },
   "dependencies": {
     "@fluentui/react-components": "^9.66.8",
