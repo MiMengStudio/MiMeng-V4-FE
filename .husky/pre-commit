@@ -1,6 +1,32 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm prettier
+# Get staged files
+ALL_STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
 
-git add .
+# Filter files in src directory with supported extensions
+STAGED_FILES=""
+for file in $ALL_STAGED_FILES; do
+  case "$file" in
+    src/*.js|src/*.jsx|src/*.ts|src/*.tsx|src/*.json|src/*.md)
+      STAGED_FILES="$STAGED_FILES $file"
+      ;;
+  esac
+done
+
+if [ -n "$STAGED_FILES" ]; then
+  echo "Running prettier on staged files in src/..."
+  echo "$STAGED_FILES"
+  
+  # Run prettier on staged files
+  pnpm exec prettier --write $STAGED_FILES
+  
+  # Add formatted files back to staging area
+  git add $STAGED_FILES
+  
+  echo "Prettier formatting completed."
+else
+  echo "No files in src/ directory to format."
+fi
+
+exit 0
