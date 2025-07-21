@@ -1,6 +1,7 @@
 import { platform, type } from '@tauri-apps/plugin-os';
 import { getVersion } from '@tauri-apps/api/app';
 import { cache } from 'react';
+import { useSettings } from '@/store/settingStore';
 
 // 缓存平台信息，确保只获取一次
 let cachedPlatform: string = 'web';
@@ -47,20 +48,32 @@ try {
   }
 }
 
-const isDesktop = cachedOsType === 'windows' || cachedOsType === 'mac' || cachedOsType === 'linux';
+const originalIsDesktop =
+  cachedOsType === 'windows' || cachedOsType === 'mac' || cachedOsType === 'linux';
 
 const isMobile =
   cachedOsType === 'android' || cachedOsType === 'ios' || cachedOsType === 'harmonyos';
 
 export const usePlatform = () => {
+  const { platformOverride } = useSettings();
+
+  // 如果有平台覆盖设置，使用覆盖值
+  const effectiveIsMobile =
+    platformOverride === 'mobile' ? true : platformOverride === 'desktop' ? false : isMobile;
+  const effectiveIsDesktop = !effectiveIsMobile;
+
   return {
     platform: cachedPlatform,
     osType: cachedOsType,
     isClient,
     isWeb,
     isWebview,
-    isDesktop,
-    isMobile,
+    isDesktop: effectiveIsDesktop,
+    isMobile: effectiveIsMobile,
     version: cachedVersion,
+    platformOverride, // 返回当前的平台覆盖设置
+    // 添加原始检测结果用于调试
+    originalIsDesktop,
+    originalIsMobile: isMobile,
   };
 };

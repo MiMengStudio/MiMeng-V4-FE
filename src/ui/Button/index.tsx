@@ -5,9 +5,7 @@ import { ButtonProps } from './button.types';
 
 // 动态导入适配器
 const FluentButtonAdapter = lazy(() => import('./adapters/FluentButtonAdapter'));
-
-// 可以为未来扩展准备
-// const MUIButtonAdapter = lazy(() => import('./adapters/mui/MUIButtonAdapter'));
+const MduiButtonAdapter = lazy(() => import('./adapters/MduiButtonAdapter'));
 
 const Button: React.FC<ButtonProps> = (props) => {
   const { UIAdapter: currentUIAdapter } = useContext(ThemeContext);
@@ -17,8 +15,8 @@ const Button: React.FC<ButtonProps> = (props) => {
     switch (currentUIAdapter) {
       case UIAdapter.Fluent:
         return <FluentButtonAdapter props={props} />;
-      // case UIAdapter.MUI:
-      //   return <MUIButtonAdapter props={props} />;
+      case UIAdapter.Mdui:
+        return <MduiButtonAdapter props={props} />;
       default:
         return <FluentButtonAdapter props={props} />;
     }

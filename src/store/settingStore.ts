@@ -14,6 +14,8 @@ export type SettingsType = {
   resolvedThemeMode: ResovledThemeMode;
   themeColorPalette: ThemeColorPalette;
   UIAdapter: UIAdapter;
+  // 平台覆盖设置，用于调试
+  platformOverride?: 'mobile' | 'desktop' | null;
 };
 
 type SettingStore = {
@@ -32,6 +34,7 @@ const useSettingStore = create<SettingStore>()(
         resolvedThemeMode: getSystemThemeMode(),
         themeColorPalette: ThemeColorPalette.Default,
         UIAdapter: UIAdapter.Fluent,
+        platformOverride: null,
       },
       actions: {
         // 只需传入部分设置项即可更新

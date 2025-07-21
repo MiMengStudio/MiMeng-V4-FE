@@ -76,7 +76,7 @@ const ThemeProvider = ({ children, adapters = [] }: ThemeProviderProps) => {
           value={{
             themeMode: resolvedThemeMode as unknown as ThemeMode,
             themeColorPalette,
-            UIAdapter: UIAdapter.Fluent,
+            UIAdapter: isMobile ? UIAdapter.Mdui : UIAdapter.Fluent,
           }}
         >
           {children}

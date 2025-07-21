@@ -26,4 +26,5 @@ export enum HtmlDataAttribute {
 export enum UIAdapter {
   Fluent = 'fluent',
   Antd = 'antd',
+  Mdui = 'mdui',
 }

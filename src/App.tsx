@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import ThemeProvider from './theme/ThemeProvider';
 import { FluentUIAdapter } from './theme/adapter/fluent.adapter';
+import { MduiAdapter } from './theme/adapter';
 
 interface AppProps {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ interface AppProps {
 
 function App({ children }: AppProps) {
   return (
-    <ThemeProvider adapters={[FluentUIAdapter]}>
+    <ThemeProvider adapters={[FluentUIAdapter, MduiAdapter]}>
       <main className="app">{children}</main>
     </ThemeProvider>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSettingActions } from '@/store/settingStore';
 
 interface DebugInfoProps {
   platformInfo: unknown;
@@ -12,6 +13,7 @@ interface DebugInfoProps {
 }
 
 const DebugInfo: React.FC<DebugInfoProps> = ({ platformInfo, clipboardManager, systemTheme }) => {
+  const { setSettings } = useSettingActions();
   return (
     <section>
       <h2>调试信息</h2>
