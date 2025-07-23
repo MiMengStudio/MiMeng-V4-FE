@@ -19,6 +19,12 @@ const navItems: NavItem[] = [
     icon: 'solar:command-line-duotone',
     label: 'Test',
   },
+  {
+    id: '4',
+    path: '/debug',
+    icon: 'solar:bug-minimalistic-bold-duotone',
+    label: 'Debug',
+  },
 ];
 
 const NavDesktopLayout = () => {

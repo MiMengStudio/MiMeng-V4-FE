@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import Icon from '@/ui/Icon';
-import { NavItemComponentProps } from './nav.types';
+import { NavItemComponentProps } from '../nav.types';
 import { getAnimationDirection } from './nav.utils';
 
 interface NavItemComponentExtraProps {
@@ -32,7 +32,6 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
   const getAnimationCase = () => {
     // 如果动画正在执行，保持当前状态，不重新计算
     if (animationRunning.current) {
-      console.log('动画执行中，保持当前状态');
       return null; // 返回null，useEffect将跳过处理
     }
 
@@ -87,24 +86,13 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
 
   // 控制指示条显示状态
   useEffect(() => {
-    console.log('=== useEffect 触发 ===', {
-      animationCase,
-      itemId: item.id,
-      animationRunning: animationRunning.current,
-      isActive,
-      previousActiveId,
-      currentActiveId,
-    });
-
     // 如果动画正在执行，跳过所有处理
     if (animationRunning.current) {
-      console.log('动画执行中，跳过useEffect处理');
       return;
     }
 
     // 如果getAnimationCase返回null（动画锁定状态），也跳过处理
     if (animationCase === null) {
-      console.log('动画状态锁定，跳过处理');
       return;
     }
 
@@ -117,12 +105,10 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
       // 根据不同的动画情况执行对应的动画
       switch (animationCase) {
         case 'enter-from-up':
-          console.log('执行向下切换进入动画');
           executeEnterDownAnimation();
           break;
 
         case 'enter-from-down':
-          console.log('执行向上切换进入动画');
           executeEnterUpAnimation();
           break;
 
@@ -135,7 +121,6 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
           break;
 
         case 'normal-active':
-          console.log('正常激活状态');
           // 直接显示，无动画
           animationRunning.current = false; // 确保重置动画状态
           controls.set({
@@ -235,29 +220,23 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
   };
 
   const executeEnterDownAnimation = async () => {
-    console.log('executeEnterDownAnimation 被调用，animationRunning:', animationRunning.current);
     if (animationRunning.current) {
-      console.log('动画正在执行中，跳过');
       return;
     }
     animationRunning.current = true;
     setIsSwitching(true);
-    console.log('设置 animationRunning 为 true，开始向下进入动画');
     try {
       // 等待前一个退出动画完成
       await new Promise((resolve) => setTimeout(resolve, 500));
       // 等待下一帧，确保motion元素已经渲染完成
       await new Promise((resolve) => requestAnimationFrame(resolve));
-      console.log('等待渲染完成');
       // 先强制设置初始状态，确保动画有明确的起始点
-      console.log('设置初始状态');
       controls.set({
         top: '0%',
         height: '0%',
         bottom: 'auto',
       });
       // 第一步：top保持0，height从0增长到75%
-      console.log('执行第一步：从顶部伸长');
       await controls.start(
         {
           height: '75%',
@@ -265,7 +244,6 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
         { duration: 0.1, ease: 'easeOut' },
       );
       // 第二步：top从0移动到25%，height从75%减少到50%（最终位置）
-      console.log('执行第二步：移动到最终位置');
       await controls.start(
         {
           top: '25%',
@@ -273,11 +251,9 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
         },
         { duration: 0.1, ease: 'easeOut' },
       );
-      console.log('向下进入动画完成');
     } catch (error) {
       console.error('向下进入动画执行出错:', error);
     } finally {
-      console.log('重置 animationRunning 为 false');
       animationRunning.current = false;
       setShouldShowIndicator(true);
       setIsSwitching(false);
@@ -285,29 +261,23 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
   };
 
   const executeEnterUpAnimation = async () => {
-    console.log('executeEnterUpAnimation 被调用，animationRunning:', animationRunning.current);
     if (animationRunning.current) {
-      console.log('动画正在执行中，跳过');
       return;
     }
     animationRunning.current = true;
     setIsSwitching(true);
-    console.log('设置 animationRunning 为 true，开始向上进入动画');
     try {
       // 等待前一个退出动画完成
       await new Promise((resolve) => setTimeout(resolve, 500));
       // 等待下一帧，确保motion元素已经渲染完成
       await new Promise((resolve) => requestAnimationFrame(resolve));
-      console.log('等待渲染完成');
       // 先强制设置初始状态，确保动画有明确的起始点
-      console.log('设置初始状态');
       controls.set({
         bottom: '0%',
         height: '0%',
         top: 'auto',
       });
       // 第一步：bottom保持0，height从0增长到75%
-      console.log('执行第一步：从底部伸长');
       await controls.start(
         {
           bottom: '0%',
@@ -317,7 +287,6 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
         { duration: 0.1, ease: 'easeOut' },
       );
       // 第二步：bottom从0移动到25%，height从75%减少到50%（最终位置）
-      console.log('执行第二步：移动到最终位置');
       await controls.start(
         {
           bottom: '25%',
@@ -326,11 +295,9 @@ const NavItemComponent: React.FC<NavItemComponentProps & NavItemComponentExtraPr
         },
         { duration: 0.1, ease: 'easeOut' },
       );
-      console.log('向上进入动画完成');
     } catch (error) {
       console.error('向上进入动画执行出错:', error);
     } finally {
-      console.log('重置 animationRunning 为 false');
       animationRunning.current = false;
       setShouldShowIndicator(true);
       setIsSwitching(false);

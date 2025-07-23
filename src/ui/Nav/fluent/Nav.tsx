@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import Icon from '@/ui/Icon';
 import NavItemComponent from './NavItem';
-import { NavProps, NavItem } from './nav.types';
+import { NavProps, NavItem } from '../nav.types';
 import { fluentBackgrounds } from '@/theme/fluent-classes';
 
-const Nav: React.FC<NavProps> = ({ items, className = '' }) => {
+const FluentNav: React.FC<NavProps> = ({ items, className = '' }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -78,4 +78,4 @@ const Nav: React.FC<NavProps> = ({ items, className = '' }) => {
   );
 };
 
-export default Nav;
+export default FluentNav;

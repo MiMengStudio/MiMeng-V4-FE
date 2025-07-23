@@ -10,4 +10,5 @@ export type ThemeContextType = {
   themeMode: ThemeMode;
   themeColorPalette: string;
   UIAdapter: UIAdapter;
+  primaryColor: string;
 };

@@ -21,4 +21,11 @@ export interface NavItemComponentProps {
 export interface NavProps {
   items: NavItem[];
   className?: string;
+  scrollTarget?: string; // MDUI scroll-target 属性支持
 }
+
+export interface NavAdapterProps {
+  props: NavProps;
+}
+
+export type NavAdapter = React.FC<NavAdapterProps>;
